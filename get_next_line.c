@@ -6,26 +6,27 @@
 /*   By: rstumpf <rstumpf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 17:50:18 by rstumpf           #+#    #+#             */
-/*   Updated: 2024/10/29 16:05:56 by rstumpf          ###   ########.fr       */
+/*   Updated: 2024/10/29 16:26:30 by rstumpf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include "get_next_line.h"
 
 // char	*get_next_line(int fd)
 // {
+	
 // }
 
 int	main(void)
 {
-	FILE	*fptr;
-	char	myString[100];
+	int		fd;
+	char	buffer[100];
+	ssize_t	bytes_read;
 
-	fptr = fopen("my_poem.txt", "r");
-	if (fptr != NULL)
-		while (fgets(myString, 3, fptr))
-			printf("%s", myString);
-	else
-		printf("Not able to open the file.");
-	fclose(fptr);
+	fd = open("my_poem.txt", O_RDONLY);
+	bytes_read = read(fd, buffer, 3);
+	buffer[bytes_read] = '\0';
+	printf("%s", buffer);
+	close(fd);
+	return (0);
 }
