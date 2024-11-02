@@ -6,7 +6,7 @@
 /*   By: rstumpf <rstumpf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 17:50:18 by rstumpf           #+#    #+#             */
-/*   Updated: 2024/11/02 13:40:16 by rstumpf          ###   ########.fr       */
+/*   Updated: 2024/11/02 13:46:27 by rstumpf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char	*get_next_line(int fd)
 		find_line[bytes_read] = '\0';
 		temp = ft_strjoin(buffer, find_line);
 		if (!temp)
-			free(temp);
+			free(buffer);
 		buffer = temp;
 		if (ft_strchr(buffer, '\n'))
 			break ;
