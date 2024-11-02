@@ -6,7 +6,7 @@
 /*   By: rstumpf <rstumpf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 17:50:18 by rstumpf           #+#    #+#             */
-/*   Updated: 2024/11/02 16:32:40 by rstumpf          ###   ########.fr       */
+/*   Updated: 2024/11/02 18:02:28 by rstumpf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,23 @@ char	*get_next_line(int fd)
 		buffer = temp;
 	}
 	output = ft_createline(buffer, '\n');
-	buffer = ft_getremainder(buffer, '\n');
+	buffer = ft_getremainder(buffer, '\n', output);
 	return (output);
+}
+
+char	*ft_changebuffer(char *output, char *buffer)
+{
+	char	*changed_buffer;
+
+	while (*output == *buffer)
+	{
+		output++;
+		buffer++;
+	}
+	while (*buffer)
+		*changed_buffer++ = *buffer++;
+	*changed_buffer = '\0';
+	return (changed_buffer);
 }
 
 int	main(void)
@@ -52,12 +67,12 @@ int	main(void)
 	fd = open("my_poem.txt", O_RDONLY);
 	buffer1 = get_next_line(fd);
 	buffer2 = get_next_line(fd);
-	// buffer3 = get_next_line(fd);
-	// buffer4 = get_next_line(fd);
+	buffer3 = get_next_line(fd);
+	buffer4 = get_next_line(fd);
 	printf("%s", buffer1);
 	printf("%s", buffer2);
-	// printf("%s", buffer3);
-	// printf("%s", buffer4);
+	printf("%s", buffer3);
+	printf("%s", buffer4);
 	close(fd);
 	return (0);
 }
