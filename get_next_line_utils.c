@@ -6,7 +6,7 @@
 /*   By: rstumpf <rstumpf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 17:56:39 by rstumpf           #+#    #+#             */
-/*   Updated: 2024/11/02 15:22:23 by rstumpf          ###   ########.fr       */
+/*   Updated: 2024/11/02 16:32:08 by rstumpf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,4 +87,29 @@ char	*ft_createline(char *string, int c)
 	p++;
 	*p = '\0';
 	return (p - (len + 1));
+}
+
+char	*ft_getremainder(char *string, int c)
+{
+	int		len;
+	int		len_total;
+	int		i;
+	char	*p;
+
+	len = 0;
+	while (string[len])
+		len++;
+	len_total = len;
+	while (string[len] != '\n')
+		len--;
+	p = malloc(sizeof(char) * ((len_total - len)));
+	if (!p)
+		return (NULL);
+	i = 0;
+	while (string[len + 1] != '\0')
+	{
+		p[i++] = string[len++];
+	}
+	p[i] = '\0';
+	return (p);
 }
