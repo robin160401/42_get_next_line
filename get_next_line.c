@@ -6,7 +6,7 @@
 /*   By: rstumpf <rstumpf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 17:50:18 by rstumpf           #+#    #+#             */
-/*   Updated: 2024/11/02 18:02:28 by rstumpf          ###   ########.fr       */
+/*   Updated: 2024/11/03 11:59:13 by rstumpf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,61 +18,77 @@
 char	*get_next_line(int fd)
 {
 	static char	*buffer;
-	char		*temp;
 	char		find_line[BUFFER_SIZE + 1];
 	ssize_t		bytes_read;
 	char		*output;
 
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (NULL);
 	if (!buffer)
 		buffer = "";
-	while (buffer && !ft_strchr(buffer, '\n'))
+	while (!ft_strchr(buffer, '\n'))
 	{
 		bytes_read = read(fd, find_line, BUFFER_SIZE);
+		if (bytes_read == -1)
+			return (buffer = NULL, NULL);
 		if (bytes_read == 0)
-			return (buffer);
+		{
+			if (buffer && *buffer)
+			{
+				output = ft_createline(buffer);
+				buffer = ft_getremainder(buffer);
+				return (output);
+			}
+			return (buffer = NULL, NULL);
+		}
 		find_line[bytes_read] = '\0';
-		temp = ft_strjoin(buffer, find_line);
-		if (!temp && buffer)
-			free(buffer);
-		buffer = temp;
+		buffer = ft_strjoin(buffer, find_line);
+		if (!buffer)
+			return (NULL);
 	}
-	output = ft_createline(buffer, '\n');
-	buffer = ft_getremainder(buffer, '\n', output);
+	output = ft_createline(buffer);
+	buffer = ft_getremainder(buffer);
 	return (output);
 }
 
-char	*ft_changebuffer(char *output, char *buffer)
-{
-	char	*changed_buffer;
 
-	while (*output == *buffer)
-	{
-		output++;
-		buffer++;
-	}
-	while (*buffer)
-		*changed_buffer++ = *buffer++;
-	*changed_buffer = '\0';
-	return (changed_buffer);
-}
 
 int	main(void)
 {
-	int		fd;
-	char	*buffer1;
-	char	*buffer2;
-	char	*buffer3;
-	char	*buffer4;
+	// int fd;
+	
+	// fd = open("my_poem.txt", O_RDONLY);
+	// char	*buffer1;
+	// char	*buffer2;
+	// char	*buffer3;
+	// char	*buffer4;
 
+	// buffer1 = get_next_line(fd);
+	// buffer2 = get_next_line(fd);
+	// buffer3 = get_next_line(fd);
+	// buffer4 = get_next_line(fd);
+	// printf("%s", buffer1);
+	// printf("%s", buffer2);
+	// printf("%s", buffer3);
+	// printf("%s", buffer4);
+	// close(fd);
+	
+	int		fd;
+	char	*line;
+	
 	fd = open("my_poem.txt", O_RDONLY);
-	buffer1 = get_next_line(fd);
-	buffer2 = get_next_line(fd);
-	buffer3 = get_next_line(fd);
-	buffer4 = get_next_line(fd);
-	printf("%s", buffer1);
-	printf("%s", buffer2);
-	printf("%s", buffer3);
-	printf("%s", buffer4);
+	if (fd < 0)
+	{
+		printf("open file failed\n");
+		exit(1);
+	}
+	while (1)
+	{
+		line = get_next_line(fd);
+		if (!line)
+			break ;
+		printf("%s", line);
+	}
 	close(fd);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: rstumpf <rstumpf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 17:56:39 by rstumpf           #+#    #+#             */
-/*   Updated: 2024/11/02 18:10:55 by rstumpf          ###   ########.fr       */
+/*   Updated: 2024/11/03 11:39:41 by rstumpf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,18 +66,18 @@ size_t	ft_strlen(const char *string)
 	return (i);
 }
 
-char	*ft_createline(char *string, int c)
+char	*ft_createline(char *string)
 {
 	int		len;
 	char	*p;
 
 	len = 0;
-	while (string[len] != c && string[len])
+	while (string[len] != '\n' && string[len])
 		len++;
 	p = malloc(sizeof(char) * (len + 1));
 	if (!p)
 		return (NULL);
-	while (*string != c && *string)
+	while (*string != '\n' && *string)
 	{
 		*p = *string;
 		p++;
@@ -89,7 +89,7 @@ char	*ft_createline(char *string, int c)
 	return (p - (len + 1));
 }
 
-char	*ft_getremainder(char *string, int c, char *output)
+char	*ft_getremainder(char *string)
 {
 	int		len;
 	int		len_total;
@@ -104,15 +104,7 @@ char	*ft_getremainder(char *string, int c, char *output)
 	if (!p)
 		return (NULL);
 	i = 0;
-	while (string[i] == output[i])
-		i++;
 	len_total = 0;
-	while (string[i])
-	{
-		p[len_total] = string[i];
-		i++;
-		len_total++;
-	}
-	p[len_total] = '\0';
-	return (p);
+	p = ft_strchr(string, '\n');
+	return (p + 1);
 }
