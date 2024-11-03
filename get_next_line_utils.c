@@ -6,7 +6,7 @@
 /*   By: rstumpf <rstumpf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 17:56:39 by rstumpf           #+#    #+#             */
-/*   Updated: 2024/11/03 11:39:41 by rstumpf          ###   ########.fr       */
+/*   Updated: 2024/11/03 15:22:37 by rstumpf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 char	*ft_strchr(const char *s, int c)
 {
+	if (s == NULL)
+		return (NULL);
 	while (*s != '\0')
 	{
 		if (*s == (char) c)
@@ -66,27 +68,31 @@ size_t	ft_strlen(const char *string)
 	return (i);
 }
 
-char	*ft_createline(char *string)
+char	*ft_createline(char *buffer)
 {
 	int		len;
-	char	*p;
+	int		i;
+	char	*output_line;
 
 	len = 0;
-	while (string[len] != '\n' && string[len])
+	i = 0;
+	while (buffer[len] != '\n' && buffer[len])
 		len++;
-	p = malloc(sizeof(char) * (len + 1));
-	if (!p)
+	output_line = malloc(sizeof(char) * (len + 1));
+	if (!output_line)
 		return (NULL);
-	while (*string != '\n' && *string)
+	while (buffer[i] != '\n' && buffer[i])
 	{
-		*p = *string;
-		p++;
-		string++;
+		output_line[i] = buffer[i];
+		i++;
 	}
-	*p = '\n';
-	p++;
-	*p = '\0';
-	return (p - (len + 1));
+	if (buffer[i] == '\n')
+	{
+		output_line[i] = '\n';
+		i++;
+	}
+	output_line[i] = '\0';
+	return (output_line);
 }
 
 char	*ft_getremainder(char *string)
@@ -97,9 +103,11 @@ char	*ft_getremainder(char *string)
 	char	*p;
 
 	len = 0;
-	while (string[len] != '\n')
+	while (string[len] != '\n' && string[len])
 		len++;
 	len_total = ft_strlen(string);
+	if (len_total - len == 0)
+		return (NULL);
 	p = malloc(sizeof(char) * ((len_total - len)));
 	if (!p)
 		return (NULL);
