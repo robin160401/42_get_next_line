@@ -6,7 +6,7 @@
 /*   By: rstumpf <rstumpf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 17:50:14 by rstumpf           #+#    #+#             */
-/*   Updated: 2024/11/03 15:19:05 by rstumpf          ###   ########.fr       */
+/*   Updated: 2024/11/03 16:02:25 by rstumpf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,5 @@ char	*ft_strjoin(char const *s1, char const *s2);
 size_t	ft_strlen(const char *string);
 char	*ft_createline(char *string);
 char	*ft_getremainder(char *string);
-char	*ft_createline2(char *string);
 
 #endif

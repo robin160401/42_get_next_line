@@ -6,7 +6,7 @@
 /*   By: rstumpf <rstumpf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 17:50:18 by rstumpf           #+#    #+#             */
-/*   Updated: 2024/11/03 15:27:42 by rstumpf          ###   ########.fr       */
+/*   Updated: 2024/11/03 16:09:10 by rstumpf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 char	*get_next_line(int fd)
 {
-	static char	*buffer;
+	static char	*buffer = NULL;
 	char		find_line[BUFFER_SIZE + 1];
 	ssize_t		bytes_read;
 	char		*output;
@@ -51,42 +51,42 @@ char	*get_next_line(int fd)
 	return (output);
 }
 
-int	main(void)
-{
-	// int fd;
+// int	main(void)
+// {
+// 	// int fd;
 	
-	// fd = open("my_poem.txt", O_RDONLY);
-	// char	*buffer1;
-	// char	*buffer2;
-	// char	*buffer3;
-	// char	*buffer4;
+// 	// fd = open("my_poem.txt", O_RDONLY);
+// 	// char	*buffer1;
+// 	// char	*buffer2;
+// 	// char	*buffer3;
+// 	// char	*buffer4;
 
-	// buffer1 = get_next_line(fd);
-	// buffer2 = get_next_line(fd);
-	// buffer3 = get_next_line(fd);
-	// buffer4 = get_next_line(fd);
-	// printf("%s", buffer1);
-	// printf("%s", buffer2);
-	// printf("%s", buffer3);
-	// printf("%s", buffer4);
-	// close(fd);
+// 	// buffer1 = get_next_line(fd);
+// 	// buffer2 = get_next_line(fd);
+// 	// buffer3 = get_next_line(fd);
+// 	// buffer4 = get_next_line(fd);
+// 	// printf("%s", buffer1);
+// 	// printf("%s", buffer2);
+// 	// printf("%s", buffer3);
+// 	// printf("%s", buffer4);
+// 	// close(fd);
 	
-	int		fd;
-	char	*line;
-	
-	fd = open("my_poem.txt", O_RDONLY);
-	if (fd < 0)
-	{
-		printf("open file failed\n");
-		exit(1);
-	}
-	while (1)
-	{
-		line = get_next_line(fd);
-		if (!line)
-			break ;
-		printf("%s", line);
-	}
-	close(fd);
-	return (0);
-}
+// 	int		fd;
+// 	char	*line;
+
+// 	fd = open("my_poem.txt", O_RDONLY);
+// 	if (fd < 0)
+// 	{
+// 		printf("open file failed\n");
+// 		exit(1);
+// 	}
+// 	while (1)
+// 	{
+// 		line = get_next_line(fd);
+// 		if (!line)
+// 			break ;
+// 		printf("%s", line);
+// 	}
+// 	close(fd);
+// 	return (0);
+// }

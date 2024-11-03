@@ -6,7 +6,7 @@
 /*   By: rstumpf <rstumpf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 17:56:39 by rstumpf           #+#    #+#             */
-/*   Updated: 2024/11/03 15:22:37 by rstumpf          ###   ########.fr       */
+/*   Updated: 2024/11/03 16:13:48 by rstumpf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,8 @@ char	*ft_createline(char *buffer)
 	i = 0;
 	while (buffer[len] != '\n' && buffer[len])
 		len++;
+	if (buffer[len] == '\n')
+		len += 1;
 	output_line = malloc(sizeof(char) * (len + 1));
 	if (!output_line)
 		return (NULL);
