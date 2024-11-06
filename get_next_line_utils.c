@@ -6,7 +6,7 @@
 /*   By: rstumpf <rstumpf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 17:56:39 by rstumpf           #+#    #+#             */
-/*   Updated: 2024/11/05 13:45:07 by rstumpf          ###   ########.fr       */
+/*   Updated: 2024/11/06 12:11:19 by rstumpf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,5 +116,6 @@ char	*ft_getremainder(char *string)
 	i = 0;
 	len_total = 0;
 	p = ft_strchr(string, '\n');
+	
 	return (p + 1);
 }

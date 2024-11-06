@@ -6,7 +6,7 @@
 /*   By: rstumpf <rstumpf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 17:50:18 by rstumpf           #+#    #+#             */
-/*   Updated: 2024/11/05 15:15:43 by rstumpf          ###   ########.fr       */
+/*   Updated: 2024/11/06 18:51:39 by rstumpf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,37 +17,25 @@
 
 char	*get_next_line(int fd)
 {
-	static char	*buffer = NULL;
-	char		find_line[BUFFER_SIZE + 1];
+	static char	leftover[BUFFER_SIZE + 3];
+	char		buffer[BUFFER_SIZE + 1];
 	ssize_t		bytes_read;
 	char		*output;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	if (!buffer)
-		buffer = "";
 	while (!ft_strchr(buffer, '\n'))
 	{
-		bytes_read = read(fd, find_line, BUFFER_SIZE);
-		if (bytes_read == -1)
-			return (buffer = NULL,  NULL);
-		if (bytes_read == 0)
-		{
-			if (buffer && *buffer)
-			{
-				output = ft_createline(buffer);
-				buffer = ft_getremainder(buffer);
-				return (output);
-			}
-			return (NULL);
-		}
-		find_line[bytes_read] = '\0';
-		buffer = ft_strjoin(buffer, find_line);
-		if (!buffer)
-			return (free(buffer), NULL);
+		bytes_read = read(fd, buffer, BUFFER_SIZE);
+		buffer[bytes_read] = '\0';
+		output = ft_strjoin(output, buffer);
 	}
-	output = ft_createline(buffer);
-	buffer = ft_getremainder(buffer);
+	output = ft_createline(output);
+	bytes_read = 0;
+	while (buffer[bytes_read])
+	{
+		
+	}
 	return (output);
 }
 
