@@ -6,7 +6,7 @@
 /*   By: rstumpf <rstumpf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 17:50:18 by rstumpf           #+#    #+#             */
-/*   Updated: 2024/11/06 19:14:11 by rstumpf          ###   ########.fr       */
+/*   Updated: 2024/11/06 20:51:39 by rstumpf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,35 @@ char	*get_next_line(int fd)
 		output = malloc(1 * sizeof(char));
 		output[0] = '\0';
 	}
+	output = ft_strjoin(output, leftover);
+
 	while (!ft_strchr(buffer, '\n'))
 	{
 		bytes_read = read(fd, buffer, BUFFER_SIZE);
+		if (bytes_read == 0)
+		{
+			if (leftover[0] == 0)
+				return (NULL);
+			ft_bzero(leftover, BUFFER_SIZE + 3);
+			i = 0;
+			while (output[bytes_read] != '\n' && output[bytes_read])
+				bytes_read++;
+			while (output[bytes_read])
+			{
+				leftover[i] = output[bytes_read + 1];
+				i++;
+				bytes_read++;
+			}
+			output = ft_createline(output);
+			return (output);
+		}
 		buffer[bytes_read] = '\0';
 		output = ft_strjoin(output, buffer);
 	}
 	output = ft_createline(output);
 	bytes_read = 0;
 	i = 0;
-	while (buffer[bytes_read] != '\n')
+	while (buffer[bytes_read] != '\n' && buffer[bytes_read])
 		bytes_read++;
 	while (buffer[bytes_read])
 	{
