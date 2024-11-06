@@ -6,7 +6,7 @@
 /*   By: rstumpf <rstumpf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 17:50:18 by rstumpf           #+#    #+#             */
-/*   Updated: 2024/11/06 18:51:39 by rstumpf          ###   ########.fr       */
+/*   Updated: 2024/11/06 19:14:11 by rstumpf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,16 @@ char	*get_next_line(int fd)
 	static char	leftover[BUFFER_SIZE + 3];
 	char		buffer[BUFFER_SIZE + 1];
 	ssize_t		bytes_read;
-	char		*output;
+	char		*output = NULL;
+	int			i;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
+	if (!output)
+	{
+		output = malloc(1 * sizeof(char));
+		output[0] = '\0';
+	}
 	while (!ft_strchr(buffer, '\n'))
 	{
 		bytes_read = read(fd, buffer, BUFFER_SIZE);
@@ -32,9 +38,14 @@ char	*get_next_line(int fd)
 	}
 	output = ft_createline(output);
 	bytes_read = 0;
+	i = 0;
+	while (buffer[bytes_read] != '\n')
+		bytes_read++;
 	while (buffer[bytes_read])
 	{
-		
+		leftover[i] = buffer[bytes_read + 1];
+		i++;
+		bytes_read++;
 	}
 	return (output);
 }
