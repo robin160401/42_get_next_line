@@ -6,7 +6,7 @@
 /*   By: rstumpf <rstumpf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 17:50:18 by rstumpf           #+#    #+#             */
-/*   Updated: 2024/11/07 15:56:29 by rstumpf          ###   ########.fr       */
+/*   Updated: 2024/11/07 16:10:58 by rstumpf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,17 +64,17 @@ void	ft_update_leftover(char *leftover)
 
 char	*get_next_line(int fd)
 {
-	static char	leftover[1024][BUFFER_SIZE + 1];
+	static char	leftover[BUFFER_SIZE + 1];
 	char		*output;
 	char		*new_output;
 
 	output = NULL;
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	output = ft_strjoin("", leftover[fd]);
+	output = ft_strjoin("", leftover);
 	if (!output)
 		return (NULL);
-	output = ft_read_line(fd, output, leftover[fd]);
+	output = ft_read_line(fd, output, leftover);
 	if (!output)
 		return (NULL);
 	new_output = ft_createline(output);
@@ -82,7 +82,7 @@ char	*get_next_line(int fd)
 	output = NULL;
 	if (!new_output)
 		return (NULL);
-	ft_update_leftover(leftover[fd]);
+	ft_update_leftover(leftover);
 	return (new_output);
 }
 
