@@ -6,7 +6,7 @@
 /*   By: rstumpf <rstumpf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 17:50:14 by rstumpf           #+#    #+#             */
-/*   Updated: 2024/11/07 10:47:50 by rstumpf          ###   ########.fr       */
+/*   Updated: 2024/11/07 12:24:50 by rstumpf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,7 @@ char	*ft_createline(char *string);
 char	*ft_getremainder(char *string);
 char	*ft_strdup(const char *s1);
 void	ft_bzero(void *s, size_t n);
+char	*ft_read_line(int fd, char *output, char *leftover);
+void	ft_update_leftover(char *leftover);
 
 #endif

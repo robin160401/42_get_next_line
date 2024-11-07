@@ -6,7 +6,7 @@
 /*   By: rstumpf <rstumpf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 17:56:39 by rstumpf           #+#    #+#             */
-/*   Updated: 2024/11/06 20:41:27 by rstumpf          ###   ########.fr       */
+/*   Updated: 2024/11/07 12:10:50 by rstumpf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	int		i;
 	int		j;
 
+	if (!s1 || !s2)
+		return (NULL);
 	p = malloc(ft_strlen((char *)s1) + ft_strlen((char *)s2) + 1);
 	if (!p)
 		return (NULL);
@@ -47,11 +49,10 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	j = 0;
 	while (s2[j] != '\0')
 	{
-		p[i] = s2[j];
+		p[i + j] = s2[j];
 		j++;
-		i++;
 	}
-	p[i] = '\0';
+	p[i + j] = '\0';
 	return (p);
 }
 
