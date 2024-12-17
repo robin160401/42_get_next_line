@@ -6,7 +6,7 @@
 /*   By: rstumpf <rstumpf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 17:50:18 by rstumpf           #+#    #+#             */
-/*   Updated: 2024/11/07 16:10:58 by rstumpf          ###   ########.fr       */
+/*   Updated: 2024/11/10 18:45:49 by rstumpf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,8 @@ char	*ft_read_line(int fd, char *output, char *leftover)
 		free(output);
 		if (!temp)
 			return (NULL);
-		output = temp;
 	}
-	return (output);
+	return (temp);
 }
 
 void	ft_update_leftover(char *leftover)
@@ -86,26 +85,26 @@ char	*get_next_line(int fd)
 	return (new_output);
 }
 
-// int	main(void)
-// {
-// 	int		fd;
-// 	char	*line;
+int	main(void)
+{
+	int		fd;
+	char	*line;
 
-// 	fd = open("my_poem.txt", O_RDONLY);
-// 	if (fd < 0)
-// 	{
-// 		perror("Failed to open file");
-// 		exit(1);
-// 	}
-// 	while (1)
-// 	{
-// 		line = get_next_line(fd);
-// 		if (!line)
-// 			break ;
-// 		printf("%s", line);
-// 		free(line);
-// 	}
-// 	printf("Test fuer null: %s", get_next_line(fd));
-// 	close(fd);
-// 	return (0);
-// }
+	fd = open("my_poem.txt", O_RDONLY);
+	if (fd < 0)
+	{
+		perror("Failed to open file");
+		exit(1);
+	}
+	while (1)
+	{
+		line = get_next_line(fd);
+		if (!line)
+			break ;
+		printf("%s", line);
+		free(line);
+	}
+	printf("Test fuer null: %s", get_next_line(fd));
+	close(fd);
+	return (0);
+}
